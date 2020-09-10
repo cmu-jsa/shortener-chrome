@@ -1,0 +1,35 @@
+html {
+  background: #eeeeee;
+  color: #222222;
+}
+
+body {
+  width: 300px;
+  margin: 0;
+}
+
+h1 {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.container {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.header {
+  padding-top: 8px;
+  padding-bottom: 12px;
+  color: #eeeeee;
+  background-color: #2e3192;
+}
+
+.title-link {
+  color: #eeeeee;
+  text-decoration: none;
+}
+
+.body-link {
+  color: #f2001f;
+}

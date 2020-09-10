@@ -1,6 +1,4 @@
-const host = 'http://localhost:5000';
-const username = 'riki';
-const password = 'riki';
+const HOST = 'http://jsa.life';
 
 /**
  * Automatically sets the originalURL variable to the URL of the current tab.
@@ -12,31 +10,49 @@ chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
   }
 });
 
+/**
+ * submit event handler (when the shorten button is pressed)
+ */
 const shortenForm = document.getElementById('shortenForm');
 shortenForm.addEventListener('submit', (e) => {
   e.preventDefault();
   new FormData(shortenForm); // triggers a formdata event handled below
 });
 
+/**
+ * formdata event handler
+ */
 shortenForm.addEventListener('formdata', (e) => {
   const data = [...e.formData.entries()];
   const shortenedText = data.find(entry => entry[0] === 'shortenedText')[1];
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', `${host}/api/shorten`);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.setRequestHeader('Authorization', `Basic ${btoa(`${username}:${password}`)}`);
-  xhr.onreadystatechange = function() {
-    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-      const response = JSON.parse(this.response);
+  chrome.storage.sync.get({username: '', password: ''}, (items) => {
+    const username = items.username;
+    const password = items.password;
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `${HOST}/api/shorten`);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.setRequestHeader('Authorization', `Basic ${btoa(`${username}:${password}`)}`);
+    xhr.onreadystatechange = function() {
       const resultModal = document.getElementById('result');
-      if (response.success) {
-        resultModal.innerText = `${originalURL} was shortened to ${response.output}`;
-      } else {
-        resultModal.innerText = response.output;
-        resultModal.style = 'background-color: red;'
+      if (this.readyState === XMLHttpRequest.DONE) {
+        if (this.status === 401) {
+          resultModal.innerText = 'Invalid credentials (hint: check options)';
+          resultModal.style = 'background-color: red;'
+        } else if (this.status !== 200) {
+          resultModal.innerText = 'Something went wrong';
+          resultModal.style = 'background-color: red;'
+        } else {
+          const response = JSON.parse(this.response);
+          if (response.success) {
+            resultModal.innerText = `${originalURL} was shortened to ${response.output}`;
+          } else {
+            resultModal.innerText = response.output;
+            resultModal.style = 'background-color: red;'
+          }
+        }
       }
     }
-  }
 
-  xhr.send(`{"original":"${originalURL}","short":"${shortenedText}"}`);
+    xhr.send(`{"original":"${originalURL}","short":"${shortenedText}"}`);
+  });
 });

@@ -1,11 +1,12 @@
 {
   "name": "jsa.life/*",
   "version": "0.0.1",
-  "description": "Use the features of jsa.life/* from any page",
+  "description": "Shorten URLs without leaving the page",
   "manifest_version": 2,
-  "permissions": ["tabs"],
+  "permissions": ["tabs", "storage"],
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "logo.png"
-  }
+  },
+  "options_page": "options.html"
 }

@@ -1,13 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/popup.css">
+  </head>
   <body>
-    <h1>jsa.life</h1>
+    <div class="container header">
+      <h1><a href="http://jsa.life" class="title-link">jsa.life/*</a></h1>
+    </div>
+    <div class="container">
+      <form id="shortenForm">
+        <label for="shortenedText">short</label><br>
+        <input type="text" id="shortenedText" name="shortenedText"><br>
+        <input type="submit" value="Shorten">
+      </form>
+    </div>
     <p id="result"></p>
-    <form id="shortenForm">
-      <label for="shortenedText">short</label><br>
-      <input type="text" id="shortenedText" name="shortenedText"><br>
-      <input type="submit" value="Shorten">
-    </form>
+    <ul>
+      <li><a href="options.html" target="_blank" class="body-link">Options</a></li>
+      <li><a href="https://cmujsa.com" class="body-link">CMU JSA Homepage</a></li>
+      <li><a href="https://www.facebook.com/cmujsa" class="body-link">Facebook</a></li>
+      <li><a href="https://www.instagram.com/cmujsa/" class="body-link">Instagram</a></li>
+    </ul>
     <script src="popup.js"></script>
   </body>
 </html>
