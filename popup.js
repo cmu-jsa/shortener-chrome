@@ -1,4 +1,4 @@
-const HOST = 'http://jsa.life';
+const HOST = 'https://jsa-life.herokuapp.com';
 
 /**
  * Automatically sets the originalURL variable to the URL of the current tab.
@@ -8,6 +8,14 @@ chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
   if (tabs.length > 0) {
     originalURL = tabs[0].url;
   }
+});
+
+/**
+ * Handles clicks to copy shortened url
+ */
+const grandResult = document.getElementById('grandResult');
+grandResult.addEventListener('click', (e) => {
+  navigator.clipboard.writeText(e.target.value);
 });
 
 /**
@@ -33,21 +41,24 @@ shortenForm.addEventListener('formdata', (e) => {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Authorization', `Basic ${btoa(`${username}:${password}`)}`);
     xhr.onreadystatechange = function() {
-      const resultModal = document.getElementById('result');
+      const successModal = document.getElementById('resultSuccess');
+      const failureModal = document.getElementById('resultFailure');
       if (this.readyState === XMLHttpRequest.DONE) {
         if (this.status === 401) {
-          resultModal.innerText = 'Invalid credentials (hint: check options)';
-          resultModal.style = 'background-color: red;'
+          failureModal.innerText = 'Invalid credentials (hint: check options)';
+          switchModals(failureModal, successModal);
         } else if (this.status !== 200) {
-          resultModal.innerText = 'Something went wrong';
-          resultModal.style = 'background-color: red;'
+          failureModal.innerText = 'Something went wrong';
+          switchModals(failureModal, successModal);
         } else {
           const response = JSON.parse(this.response);
           if (response.success) {
-            resultModal.innerText = `${originalURL} was shortened to ${response.output}`;
+            grandResult.value = response.output;
+            grandResult.innerText = response.output;
+            switchModals(successModal, failureModal);
           } else {
-            resultModal.innerText = response.output;
-            resultModal.style = 'background-color: red;'
+            failureModal.innerText = response.output;
+            switchModals(failureModal, successModal);
           }
         }
       }
@@ -56,3 +67,8 @@ shortenForm.addEventListener('formdata', (e) => {
     xhr.send(`{"original":"${originalURL}","short":"${shortenedText}"}`);
   });
 });
+
+function switchModals(show, noShow) {
+  show.classList.remove('hidden');
+  noShow.classList.add('hidden');
+}

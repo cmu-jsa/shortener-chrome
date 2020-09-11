@@ -6,23 +6,39 @@
     <link rel="stylesheet" type="text/css" href="/popup.css">
   </head>
   <body>
-    <div class="container header">
-      <h1><a href="http://jsa.life" target="_blank" class="title-link">jsa.life/*</a></h1>
+    <!-- Header -->
+    <div class="container jsa-header">
+      <h1><a href="http://jsa.life" target="_blank" class="header-link">jsa.life/*</a></h1>
     </div>
-    <div class="container">
+
+    <!-- Input form -->
+    <div class="container jsa-form">
       <form id="shortenForm">
-        jsa.life/
-        <input type="text" id="shortenedText" name="shortenedText" placeholder="optional"><br>
-        <input type="submit" value="Generate shortened URL for current page">
+        <div class="jsa-shortened">
+          <label for="shortenedText">jsa.life/</label>
+          <input type="text" class="form-input" id="shortenedText" name="shortenedText" autofocus>
+        </div>
+        <input type="submit" class="form-button" value="SHORTEN">
       </form>
     </div>
-    <p id="result"></p>
-    <ul>
-      <li><a href="options.html" target="_blank" class="body-link">Options</a></li>
-      <li><a href="https://cmujsa.com" class="body-link">CMU JSA Homepage</a></li>
-      <li><a href="https://www.facebook.com/cmujsa" class="body-link">Facebook</a></li>
-      <li><a href="https://www.instagram.com/cmujsa/" class="body-link">Instagram</a></li>
-    </ul>
+
+    <!-- Result modals -->
+    <div class="hidden jsa-result result-failure" id="resultFailure"></div>
+    <div class="hidden jsa-result result-success" id="resultSuccess">
+      Shortened to:
+      <button class="grand-result" id="grandResult"></button>
+      Click on link to copy
+    </div>
+
+    <!-- Footer -->
+    <div class="container jsa-footer">
+      <a href="options.html" target="_blank" class="footer-link">Options</a>
+    </div>
+
+    <!-- DO NOT REMOVE. This is an important div for the copy and paste functionality -->
+    <div id="forCopy"></div>
+
+    <!-- Scripts -->
     <script src="popup.js"></script>
   </body>
 </html>
