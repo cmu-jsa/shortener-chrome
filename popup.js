@@ -33,9 +33,14 @@ shortenForm.addEventListener('submit', (e) => {
 shortenForm.addEventListener('formdata', (e) => {
   const data = [...e.formData.entries()];
   const shortenedText = data.find(entry => entry[0] === 'shortenedText')[1];
-  chrome.storage.sync.get({username: '', password: ''}, (items) => {
+  chrome.storage.sync.get({
+    username: '',
+    password: '',
+    autoCopy: false,
+  }, (items) => {
     const username = items.username;
     const password = items.password;
+    const autoCopy = items.autoCopy;
     const xhr = new XMLHttpRequest();
     xhr.open('POST', `${HOST}/api/shorten`);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -48,7 +53,7 @@ shortenForm.addEventListener('formdata', (e) => {
           showFailureModal('Something went wrong');
         } else {
           const response = JSON.parse(this.response);
-          showResponse(response);
+          handleResponse(response, autoCopy);
         }
       }
     }
@@ -58,9 +63,18 @@ shortenForm.addEventListener('formdata', (e) => {
 });
 
 /**
+ * Copies the response output (shortened URL) if successful
+ */
+function copyResponse(response) {
+  if (response.success) {
+    navigator.clipboard.writeText(response.output);
+  }
+}
+
+/**
  * Reflect the response status to modals
  */
-function showResponse(response) {
+function handleResponse(response, autoCopy) {
   if (!response.success) {
     showFailureModal(response.output);
   } else {
@@ -69,6 +83,11 @@ function showResponse(response) {
     grandResult.value = response.output;
     grandResult.innerText = response.output;
     toggleModals(successModal, failureModal);
+    if (autoCopy) {
+      navigator.clipboard.writeText(response.output);
+      const copyPrompt = document.getElementById('copyPrompt');
+      copyPrompt.innerText = 'Link automatically copied to clipboard\nClick on link to copy again';
+    }
   }
 }
 

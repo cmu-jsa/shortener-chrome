@@ -1,7 +1,9 @@
 function saveOptions() {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
-  chrome.storage.sync.set({username, password}, () => {
+  const autoCopy = document.getElementById('autoCopy').checked;
+  console.log(autoCopy);
+  chrome.storage.sync.set({username, password, autoCopy}, () => {
     const status = document.getElementById('status');
     status.textContent = 'saved.';
     setTimeout(() => {
@@ -14,10 +16,12 @@ function restoreOptions() {
   // Use default empty username and password
   chrome.storage.sync.get({
     username: '',
-    password: ''
+    password: '',
+    autoCopy: false,
   }, (items) => {
     document.getElementById('username').value = items.username;
     document.getElementById('password').value = items.password;
+    document.getElementById('autoCopy').checked = items.autoCopy;
   });
 }
 
