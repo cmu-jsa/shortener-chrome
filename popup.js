@@ -41,25 +41,14 @@ shortenForm.addEventListener('formdata', (e) => {
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.setRequestHeader('Authorization', `Basic ${btoa(`${username}:${password}`)}`);
     xhr.onreadystatechange = function() {
-      const successModal = document.getElementById('resultSuccess');
-      const failureModal = document.getElementById('resultFailure');
       if (this.readyState === XMLHttpRequest.DONE) {
         if (this.status === 401) {
-          failureModal.innerText = 'Invalid credentials (hint: check options)';
-          switchModals(failureModal, successModal);
+          showFailureModal('Invalid credentials (hint: check options)');
         } else if (this.status !== 200) {
-          failureModal.innerText = 'Something went wrong';
-          switchModals(failureModal, successModal);
+          showFailureModal('Something went wrong');
         } else {
           const response = JSON.parse(this.response);
-          if (response.success) {
-            grandResult.value = response.output;
-            grandResult.innerText = response.output;
-            switchModals(successModal, failureModal);
-          } else {
-            failureModal.innerText = response.output;
-            switchModals(failureModal, successModal);
-          }
+          showResponse(response);
         }
       }
     }
@@ -68,7 +57,38 @@ shortenForm.addEventListener('formdata', (e) => {
   });
 });
 
-function switchModals(show, noShow) {
+/**
+ * Reflect the response status to modals
+ */
+function showResponse(response) {
+  if (!response.success) {
+    showFailureModal(response.output);
+  } else {
+    const successModal = document.getElementById('resultSuccess');
+    const failureModal = document.getElementById('resultFailure');
+    grandResult.value = response.output;
+    grandResult.innerText = response.output;
+    toggleModals(successModal, failureModal);
+  }
+}
+
+/**
+ * Draw the failure modal
+ */
+function showFailureModal(text) {
+  const successModal = document.getElementById('resultSuccess');
+  const failureModal = document.getElementById('resultFailure');
+  failureModal.innerText = text;
+  toggleModals(failureModal, successModal);
+}
+
+/**
+ * Un-hide the modal passed in as show, and hide the one passed in as noShow
+ *
+ * @param show
+ * @param noShow
+ */
+function toggleModals(show, noShow) {
   show.classList.remove('hidden');
   noShow.classList.add('hidden');
 }
