@@ -2,16 +2,29 @@
 <html lang="en">
   <head>
     <title>jsa.life/* extension</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="options.css">
   </head>
   <body>
-    <label for="username">Username</label>
-    <input id="username" name="username" type="text">
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password">
-    <input id="autoCopy" type="checkbox">
-    <label for="autoCopy">Automatically copy generated URL to clipboard</label>
+    <div>
+      <h1>jsa.life/*</h1>
+    </div>
+    <div>
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text">
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password">
+    </div>
+    <div>
+      <input id="autoCopy" type="checkbox">
+      <label for="autoCopy">Automatically copy shortened link to clipboard</label>
+    </div>
     <div id="status"></div>
-    <button id="save">Save</button>
+    <div>
+      <button id="save">Save</button>
+    </div>
     <script src="options.js"></script>
   </body>
 </html>
