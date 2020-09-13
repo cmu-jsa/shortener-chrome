@@ -4,7 +4,87 @@ html {
 }
 
 body {
-  margin: 0;
   font-family: 'Open Sans', sans-serif;
   text-align: center;
+}
+
+h1 {
+  margin-top: 15vh;
+  color: #2e3192;
+}
+
+.jsa-container {
+  margin: 4vh 20vw;
+}
+
+.jsa-status {
+  color: #eeeeee;
+  background-color: #198a44;
+  font-size: 1.4rem;
+  position: fixed;
+  width: 100vw;
+  padding: 2vh 0;
+  top: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.footer-logo {
+  position: fixed;
+  width: 10vw;
+  min-width: 90px;
+  right: 30px;
+  bottom: 15px;
+}
+
+/**
+ * Customize Materialize
+ */
+
+.btn-large {
+  background: linear-gradient(#2e3192, #1d2081);
+  border: 1px solid #2e3192;
+  color: #dddddd;
+  box-shadow: none;
+  border-radius: 8px;
+}
+
+.btn-large:hover {
+  background: linear-gradient(#4f53b4, #3f42a3);
+  box-shadow: none;
+}
+
+input {
+  color: #222222;
+}
+
+/* label color */
+label {
+  color: #555555;
+}
+
+/* label underline focus color */
+input[type=text]:focus {
+  border-bottom: 1px solid #2e3192 !important;
+  box-shadow: 0 1px 0 0 #555555 !important;
+}
+
+/* label underline focus color */
+input[type=password]:focus {
+  border-bottom: 1px solid #2e3192 !important;
+  box-shadow: 0 1px 0 0 #555555 !important;
+}
+
+/* the check mark */
+[type="checkbox"]:checked+span:not(.lever):before {
+  border-right: 2px solid #f2001f !important;
+  border-bottom: 2px solid #f2001f !important;
+}
+
+/* how the check mark box looks when selected */
+[type="checkbox"].filled-in:checked+span:not(.lever):after {
+  background-color: #eeeeee !important;
+  border: 2px solid #f2001f;
 }

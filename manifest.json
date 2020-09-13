@@ -1,5 +1,5 @@
 {
-  "name": "jsa.life/*",
+  "name": "JSA URL Shortener",
   "version": "0.0.1",
   "description": "Shorten URLs without leaving the page",
   "manifest_version": 2,

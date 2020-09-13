@@ -2,12 +2,11 @@ function saveOptions() {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
   const autoCopy = document.getElementById('autoCopy').checked;
-  console.log(autoCopy);
   chrome.storage.sync.set({username, password, autoCopy}, () => {
     const status = document.getElementById('status');
-    status.textContent = 'saved.';
+    status.classList.remove('hidden');
     setTimeout(() => {
-      status.textContent = '';
+      status.classList.add('hidden');
     }, 5 * 1000);
   });
 }
