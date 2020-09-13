@@ -1,12 +1,19 @@
 {
   "name": "JSA URL Shortener",
   "version": "0.0.1",
-  "description": "Shorten URLs without leaving the page",
+  "description": "Shorten URLs without leaving your tabs",
   "manifest_version": 2,
-  "permissions": ["tabs", "storage"],
-  "browser_action": {
-    "default_popup": "popup.html",
-    "default_icon": "logo.png"
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
-  "options_page": "options.html"
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "popup/popup.html"
+  },
+  "options_page": "options/options.html"
 }
