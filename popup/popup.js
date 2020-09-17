@@ -63,15 +63,6 @@ shortenForm.addEventListener('formdata', (e) => {
 });
 
 /**
- * Copies the response output (shortened URL) if successful
- */
-function copyResponse(response) {
-  if (response.success) {
-    navigator.clipboard.writeText(response.output);
-  }
-}
-
-/**
  * Reflect the response status to modals
  */
 function handleResponse(response, autoCopy) {

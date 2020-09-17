@@ -30,8 +30,14 @@ h1 {
   text-decoration: none;
 }
 
-.jsa-form {
+.jsa-prompt {
   margin-top: 24px;
+  margin-bottom: 14px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.jsa-form {
   margin-bottom: 18px;
   text-align: center;
   font-size: 20px;
