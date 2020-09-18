@@ -1,7 +1,7 @@
 # shortener-chrome
 A chrome extension to complement the JSA URL shortener service
 
-👉 Add to your browser via [jsa.life/extension](http://jsa.life/extension)
+👉  Add to your browser via <a href="http://jsa.life/extension" target="_blank">jsa.life/extension</a>
 
 ![sample gif](sample.gif)
 
