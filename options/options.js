@@ -1,3 +1,8 @@
+/**
+ * Copyright 2020 Japanese Student Association at Carnegie Mellon University.
+ * All rights reserved. MIT license.
+ */
+
 function saveOptions() {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;

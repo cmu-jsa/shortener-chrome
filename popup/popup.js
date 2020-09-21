@@ -1,3 +1,8 @@
+/**
+ * Copyright 2020 Japanese Student Association at Carnegie Mellon University.
+ * All rights reserved. MIT license.
+ */
+
 const HOST = 'https://jsa-life.herokuapp.com';
 
 /**
